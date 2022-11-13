@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 
 const BASE_URL = 'https://api.nytimes.com/';
@@ -18,7 +17,7 @@ axiosApi.interceptors.request.use(config => {
   config.params = config.params || {};
   // add any client instance specific params to config
   config.params['api-key'] = process.env.NY_TIMES_API_KEY;
-  config.params['q'] = 'unitedstates';
+  config.params.q = 'unitedstates';
 
   return config;
 });

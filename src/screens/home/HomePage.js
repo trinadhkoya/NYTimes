@@ -1,13 +1,9 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import { View } from "react-native";
 
 class HomePage extends PureComponent {
   render() {
-    return (
-      <div>
-
-      </div>
-    );
+    return <View />;
   }
 }
 
