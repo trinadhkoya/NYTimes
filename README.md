@@ -12,6 +12,9 @@
 2. Infinite Scrolling
 3. Offline Capabilities
 
+NOTE:
+needs refractoring
+
 
 #### Screenshots
 
