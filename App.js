@@ -1,31 +1,28 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import type {Node} from 'react';
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {LogBox, SafeAreaView, StatusBar, StyleSheet} from 'react-native';
+import HomeContainer from 'screens/home/NewsContainer';
+import store from 'redux/store';
+import {Provider} from 'react-redux';
+import {Colors} from 'theme/Colors';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import HomePage from './src/screens/HomePage';
+LogBox.ignoreAllLogs();
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+const App = () => {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <HomePage />
+    <SafeAreaView style={styles.container}>
+      <StatusBar />
+      <Provider store={store}>
+        <HomeContainer />
+      </Provider>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.secondaryColor,
+  },
+});
 
 export default App;
