@@ -1,30 +1,44 @@
-import React from 'react';
-import {FlatList} from 'react-native';
-import PropTypes from 'prop-types';
+import {FlatList, useWindowDimensions, View} from 'react-native';
+import React, {useEffect} from 'react';
 import NewsItem from 'screens/home/components/NewsItem';
 import Divider from 'ui-kit/Divider';
 
-const NewsPage = props => {
-  const _renderItem = ({item}) => <NewsItem item={item} />;
+const formatData = (data, numColumns) => {
+  const amountFullRows = Math.floor(data.length / numColumns);
+  let amountItemsLastRow = data.length - amountFullRows * numColumns;
 
-  const renderItemSeparatorComponent = () => <Divider />;
+  while (amountItemsLastRow !== numColumns && amountItemsLastRow !== 0) {
+    data.push({key: `empty-${amountItemsLastRow}`, empty: true});
+    amountItemsLastRow++;
+  }
+  return data;
+};
+
+const NewsPage = props => {
+  const {width} = useWindowDimensions();
+  useEffect(() => {}, [width]);
+
+  const renderItem = ({item, index}) => {
+    return (
+      <View
+        style={{
+          width: props.numColumns === 2 ? '50%' : '100%',
+        }}>
+        <NewsItem index={index.toString()} item={item} />
+      </View>
+    );
+  };
 
   return (
     <FlatList
+      key={props.numColumns === 2 ? 'two-column' : 'one-column'}
+      data={formatData(props.news, props.numColumns)}
       numColumns={props.numColumns}
-      ItemSeparatorComponent={renderItemSeparatorComponent}
-      data={props.news}
-      renderItem={_renderItem}
-      keyExtractor={item => '_' + item._id.toString()}
+      renderItem={renderItem}
+      keyExtractor={item => item?._id.toString()}
+      ItemSeparatorComponent={() => <Divider />}
     />
   );
-};
-
-NewsPage.propTypes = {
-  news: PropTypes.array,
-};
-NewsPage.defaultProps = {
-  news: [],
 };
 
 export default NewsPage;

@@ -14,6 +14,7 @@ function FloatingButton({displayGrid, onToggle}) {
     </TouchableOpacity>
   );
 }
+
 FloatingButton.propTypes = {
   onToggle: PropTypes.func,
   displayGrid: PropTypes.bool,

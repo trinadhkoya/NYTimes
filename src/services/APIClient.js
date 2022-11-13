@@ -18,8 +18,6 @@ axiosApi.interceptors.request.use(config => {
   config.params = config.params || {};
   // add any client instance specific params to config
   config.params['api-key'] = NY_TIMES_API_KEY || process.env.NY_TIMES_API_KEY;
-  config.params.q = 'unitedstates';
-
   return config;
 });
 

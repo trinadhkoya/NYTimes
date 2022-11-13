@@ -11,10 +11,10 @@ const NewsContainer = props => {
 
   useEffect(() => {
     dispatch(fetchPostsRequest());
-  }, [displayGrid]);
+  }, []);
 
   if (props.isLoading) {
-    return <Loader isLoading={props.isLoading} />;
+    return <Loader isLoading={props.isLoading} size={'large'} />;
   }
 
   return (
@@ -22,7 +22,7 @@ const NewsContainer = props => {
       <NewsPage {...props} numColumns={displayGrid ? 2 : 1} news={props.news} />
       <FloatingButton
         onToggle={() => setDisplayGrid(!displayGrid)}
-        displayGrid={displayGrid}
+        displayGrid={!displayGrid}
       />
     </>
   );

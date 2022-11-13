@@ -4,18 +4,19 @@ import Dayjs from 'dayjs';
 import relativeTIme from 'dayjs/plugin/relativeTime';
 import {Colors} from 'theme/Colors';
 import PropTypes from 'prop-types';
+import {SCREEN_WIDTH} from 'utils/screen.utils';
 
 Dayjs.extend(relativeTIme);
 
 const NewsItem = ({item}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.snippet}>{item?.snippet || item.abstract}</Text>
-
-      <View style={styles.badge}>
+      <Text numberOfLines={2} style={styles.snippet}>
+        {item?.snippet || item.abstract}
+      </Text>
+      <View style={[styles.badge]}>
         <Text style={styles.badgeText}>{item.source}</Text>
       </View>
-
       <Text style={styles.publishedTV}>{Dayjs(item?.pub_date).fromNow()}</Text>
     </View>
   );
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
+    flex: 1,
   },
   snippet: {
     fontWeight: '500',
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
   source: {},
   badge: {
     backgroundColor: Colors.btnPrimary,
-    width: '40%',
+    width: SCREEN_WIDTH * 0.3,
     borderRadius: 50,
   },
   publishedTV: {
@@ -54,10 +56,11 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   badgeText: {
-    color: '#fff',
-    fontSize: 11,
-    lineHeight: 24,
+    color: Colors.white,
+    fontSize: 10,
+    lineHeight: 22,
     paddingHorizontal: 5,
+    flexWrap: 'wrap',
   },
 });
 
