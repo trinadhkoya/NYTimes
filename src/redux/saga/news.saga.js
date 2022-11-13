@@ -1,20 +1,20 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { fetchPostsFailed, fetchPostsSuccess } from "redux/actions/posts.actions";
+import { fetchPostsFailed, fetchPostsSuccess } from "redux/actions/news.actions";
 import { FETCH_POSTS } from "redux/actions/actionTypes";
 import { getPosts } from "services/news.service";
 import { reduxHelper } from "redux/utils/redux-helpers";
 
 function* onGetPosts({payload: query}) {
   try {
-    const response = yield call(getPosts, query);
-    yield put(fetchPostsSuccess(response.data));
+    const payload = yield call(getPosts, query);
+    yield put(fetchPostsSuccess(payload?.response?.docs));
   } catch (error) {
     yield put(fetchPostsFailed(error.response));
   }
 }
 
-function* PostsSaga() {
+function* NewsSaga() {
   yield takeLatest(reduxHelper(FETCH_POSTS).actionRequest, onGetPosts);
 }
 
-export default PostsSaga;
+export default NewsSaga;

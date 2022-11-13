@@ -1,5 +1,5 @@
-import { FETCH_POSTS } from "redux/actions/actionTypes";
-import { reduxHelper } from "redux/utils/redux-helpers";
+import {FETCH_POSTS} from 'redux/actions/actionTypes';
+import {reduxHelper} from 'redux/utils/redux-helpers';
 
 const initialState = {
   isLoading: false,

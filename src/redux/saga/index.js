@@ -1,7 +1,7 @@
 import {all, fork} from 'redux-saga/effects';
-import PostsSaga from 'redux/saga/posts.saga';
+import NewsSaga from 'redux/saga/news.saga';
 
 const rootSaga = function* () {
-  yield all([fork(PostsSaga)]);
+  yield all([fork(NewsSaga)]);
 };
 export default rootSaga;
