@@ -1,16 +1,24 @@
-import React from "react";
-import { FlatList } from "react-native";
-import PropTypes from "prop-types";
-import NewsItem from "screens/home/components/NewsItem";
-import Divider from "ui-kit/Divider";
+import React from 'react';
+import {FlatList} from 'react-native';
+import PropTypes from 'prop-types';
+import NewsItem from 'screens/home/components/NewsItem';
+import Divider from 'ui-kit/Divider';
 
-function NewsPage(props) {
-  const _renderItem = ({ item }) => <NewsItem data={item}></NewsItem>;
+const NewsPage = props => {
+  const _renderItem = ({item}) => <NewsItem item={item} />;
 
-  const renderItemSeparatorComponent = () => <Divider/>
+  const renderItemSeparatorComponent = () => <Divider />;
 
-  return <FlatList  numColumns={1} ItemSeparatorComponent={renderItemSeparatorComponent} data={props.news} renderItem={_renderItem} />;
-}
+  return (
+    <FlatList
+      numColumns={props.numColumns}
+      ItemSeparatorComponent={renderItemSeparatorComponent}
+      data={props.news}
+      renderItem={_renderItem}
+      keyExtractor={item => '_' + item._id.toString()}
+    />
+  );
+};
 
 NewsPage.propTypes = {
   news: PropTypes.array,

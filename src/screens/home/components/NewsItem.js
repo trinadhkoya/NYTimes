@@ -1,32 +1,33 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Dayjs from "dayjs";
-import relativeTIme from "dayjs/plugin/relativeTime";
-import { Colors } from "theme/Colors";
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import Dayjs from 'dayjs';
+import relativeTIme from 'dayjs/plugin/relativeTime';
+import {Colors} from 'theme/Colors';
+import PropTypes from 'prop-types';
+
 Dayjs.extend(relativeTIme);
 
-
-const NewsItem = props => {
-  const { data } = props;
+const NewsItem = ({item}) => {
   return (
     <View style={styles.container}>
-      {data?.snippet!=='' && <Text style={styles.snippet}>{data.snippet}</Text>}
+      <Text style={styles.snippet}>{item?.snippet || item.abstract}</Text>
+
       <View style={styles.badge}>
-        <Text style={styles.badgeText}>{data.source}</Text>
+        <Text style={styles.badgeText}>{item.source}</Text>
       </View>
 
-      <Text style={styles.publishedTV}>
-        {Dayjs(data?.pub_date).fromNow()}
-      </Text>
+      <Text style={styles.publishedTV}>{Dayjs(item?.pub_date).fromNow()}</Text>
     </View>
   );
 };
 
-NewsItem.propTypes = {};
+NewsItem.propTypes = {
+  item: PropTypes.object.isRequired,
+};
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.secondaryColor,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -35,25 +36,25 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     borderRadius: 5,
-    paddingHorizontal:10,
-    paddingVertical:5
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   snippet: {
-    fontWeight: "500",
+    fontWeight: '500',
     paddingVertical: 10,
   },
   source: {},
   badge: {
     backgroundColor: Colors.btnPrimary,
-    width:"40%",
-    borderRadius:50
+    width: '40%',
+    borderRadius: 50,
   },
   publishedTV: {
     paddingVertical: 10,
-    alignSelf:'flex-end'
+    alignSelf: 'flex-end',
   },
   badgeText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 11,
     lineHeight: 24,
     paddingHorizontal: 5,

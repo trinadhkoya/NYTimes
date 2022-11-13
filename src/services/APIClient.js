@@ -1,11 +1,11 @@
-import axios from "axios";
-import { NY_TIMES_API_KEY } from "@env"
+import axios from 'axios';
+import {NY_TIMES_API_KEY} from '@env';
 
-const BASE_URL = "https://api.nytimes.com/";
+const BASE_URL = 'https://api.nytimes.com/';
 
 const HEADERS = {
-  "Content-Type": "application/json; charset=utf-8",
-  Accept: "application/json",
+  'Content-Type': 'application/json; charset=utf-8',
+  Accept: 'application/json',
 };
 
 const axiosApi = axios.create({
@@ -17,8 +17,8 @@ axiosApi.interceptors.request.use(config => {
   // use config.params if it has been set
   config.params = config.params || {};
   // add any client instance specific params to config
-  config.params["api-key"] = NY_TIMES_API_KEY||process.env.NY_TIMES_API_KEY;
-  config.params.q = "unitedstates";
+  config.params['api-key'] = NY_TIMES_API_KEY || process.env.NY_TIMES_API_KEY;
+  config.params.q = 'unitedstates';
 
   return config;
 });
