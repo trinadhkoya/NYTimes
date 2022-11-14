@@ -37,9 +37,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     borderRadius: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     paddingVertical: 5,
     flex: 1,
+    marginHorizontal: 2.5,
   },
   snippet: {
     fontWeight: '500',
