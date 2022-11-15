@@ -11,6 +11,7 @@ const NewsContainer = props => {
 
   useEffect(() => {
     dispatch(fetchPostsRequest());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (props.isLoading) {
