@@ -16,10 +16,18 @@ const NewsContainer = props => {
   if (props.isLoading) {
     return <Loader isLoading={props.isLoading} size={'large'} />;
   }
+  const onFilterByCategory = val => {
+    // dispatch(fetchPostsRequest(val));
+  };
 
   return (
     <>
-      <NewsPage {...props} numColumns={displayGrid ? 2 : 1} news={props.news} />
+      <NewsPage
+        {...props}
+        onFilterByCategory={onFilterByCategory}
+        numColumns={displayGrid ? 2 : 1}
+        news={props.news}
+      />
       <FloatingButton
         onToggle={() => setDisplayGrid(!displayGrid)}
         displayGrid={!displayGrid}

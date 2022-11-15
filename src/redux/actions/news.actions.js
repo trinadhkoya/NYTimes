@@ -2,6 +2,7 @@ import {FETCH_POSTS} from 'redux/actions/actionTypes';
 import {reduxHelper} from 'redux/utils/redux-helpers';
 
 const fetchPostsRequest = query => {
+  console.log('QUERY PARAM IS' + query);
   return {
     type: reduxHelper(FETCH_POSTS).actionRequest,
     payload: query,

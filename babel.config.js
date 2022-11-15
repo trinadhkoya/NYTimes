@@ -1,7 +1,6 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset', 'es2015', 'react'],
+  presets: ['module:metro-react-native-babel-preset'],
   plugins: [
-    'transform-class-properties',
     [
       'module:react-native-dotenv',
       {

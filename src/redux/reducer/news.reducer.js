@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        data: action.payload,
+        data: state.data.concat(action.payload),
         after: action.after,
         error: '',
       };

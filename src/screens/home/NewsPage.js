@@ -2,6 +2,7 @@ import {FlatList, useWindowDimensions, View} from 'react-native';
 import React, {useEffect} from 'react';
 import NewsItem from 'screens/home/components/NewsItem';
 import Divider from 'ui-kit/Divider';
+import Loader from 'ui-kit/Loader';
 
 const formatData = (data, numColumns) => {
   const amountFullRows = Math.floor(data.length / numColumns);
@@ -16,7 +17,7 @@ const formatData = (data, numColumns) => {
 
 const NewsPage = props => {
   const {width} = useWindowDimensions();
-  useEffect(() => {}, [width]);
+  useEffect(() => {}, [width, props.news.length]);
 
   const renderItem = ({item, index}) => {
     return (
@@ -24,19 +25,29 @@ const NewsPage = props => {
         style={{
           width: props.numColumns === 2 ? '50%' : '100%',
         }}>
-        <NewsItem index={index.toString()} item={item} />
+        <NewsItem key={index.toString()} index={index.toString()} item={item} />
       </View>
     );
   };
 
   return (
     <FlatList
+      ListFooterComponent={() => {
+        return props.loading ? (
+          <Loader size={'small'} isLoading={props.isLoading} />
+        ) : null;
+      }}
       key={props.numColumns === 2 ? 'two-column' : 'one-column'}
       data={formatData(props.news, props.numColumns)}
       numColumns={props.numColumns}
       renderItem={renderItem}
-      keyExtractor={item => item?._id.toString()}
+      removeClippedSubviews={true}
+      onEndReachedThreshold={0.1}
+      keyExtractor={(item, index) => index.toString()}
       ItemSeparatorComponent={() => <Divider />}
+      onEndReached={({distanceFromEnd}) => {
+        // props.onFilterByCategory(1);
+      }}
     />
   );
 };
