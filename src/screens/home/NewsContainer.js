@@ -4,15 +4,15 @@ import {connect, useDispatch} from 'react-redux';
 import {fetchPostsRequest} from 'redux/actions/news.actions';
 import FloatingButton from 'ui-kit/FloatingButton';
 
-const initialPage = 0;
-const maxColumns = 2;
+const INITIAL_PAGE = 0;
+const MAX_COLS = 2;
 
 const NewsContainer = props => {
   const dispatch = useDispatch();
   const [displayGrid, setDisplayGrid] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchPostsRequest(initialPage));
+    dispatch(fetchPostsRequest(INITIAL_PAGE));
   }, []);
 
   const onPressLoadMore = page => {
@@ -24,7 +24,7 @@ const NewsContainer = props => {
       <NewsPage
         {...props}
         onPressLoadMore={onPressLoadMore}
-        numColumns={displayGrid ? maxColumns : 1}
+        numColumns={displayGrid ? MAX_COLS : 1}
         news={props.news}
       />
       <FloatingButton
