@@ -4,16 +4,14 @@ import {Colors} from 'theme/Colors';
 import images from 'assets/images';
 import PropTypes from 'prop-types';
 
-function FloatingButton(props) {
-  return (
-    <TouchableOpacity style={styles.container} onPress={props.onToggle}>
-      <Image
-        source={props.displayGrid ? images.grid : images.list}
-        style={styles.image}
-      />
-    </TouchableOpacity>
-  );
-}
+const FloatingButton = props => (
+  <TouchableOpacity style={styles.container} onPress={props.onToggle}>
+    <Image
+      source={props.displayGrid ? images.grid : images.list}
+      style={styles.image}
+    />
+  </TouchableOpacity>
+);
 
 FloatingButton.propTypes = {
   onToggle: PropTypes.func,

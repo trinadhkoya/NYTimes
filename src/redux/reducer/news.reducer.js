@@ -9,9 +9,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  // console.log(action.payload);
-  // console.log(action.page);
-
   switch (action.type) {
     case reduxHelper(FETCH_POSTS).actionRequest:
       return {

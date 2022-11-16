@@ -3,8 +3,8 @@ import {LogBox, SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import HomeContainer from 'screens/home/NewsContainer';
 import {Provider} from 'react-redux';
 import {Colors} from 'theme/Colors';
-import {PersistGate} from 'redux-persist/integration/react';
 import configureStore from 'redux/configureStore';
+import {PersistGate} from 'redux-persist/integration/react';
 
 LogBox.ignoreAllLogs();
 

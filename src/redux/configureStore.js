@@ -19,7 +19,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 export default () => {
   const store = createStore(
-    rootReducer,
+    persistedReducer,
     compose(applyMiddleware(sagaMiddleware)),
   );
   sagaMiddleware.run(rootSaga);
