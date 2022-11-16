@@ -1,18 +1,18 @@
 import {FETCH_POSTS} from 'redux/actions/actionTypes';
 import {reduxHelper} from 'redux/utils/redux-helpers';
 
-const fetchPostsRequest = query => {
-  console.log('QUERY PARAM IS' + query);
+const fetchPostsRequest = page => {
   return {
     type: reduxHelper(FETCH_POSTS).actionRequest,
-    payload: query,
+    payload: page,
   };
 };
 
 const fetchPostsSuccess = data => {
   return {
     type: reduxHelper(FETCH_POSTS).actionSuccess,
-    payload: data,
+    payload: data?.docs,
+    page: data.meta.offset / 10 + 1,
   };
 };
 

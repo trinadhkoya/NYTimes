@@ -4,10 +4,10 @@ import {FETCH_POSTS} from 'redux/actions/actionTypes';
 import {getPosts} from 'services/news.service';
 import {reduxHelper} from 'redux/utils/redux-helpers';
 
-function* onGetPosts({payload: query}) {
+function* onGetPosts({payload}) {
   try {
-    const payload = yield call(getPosts, query);
-    yield put(fetchPostsSuccess(payload?.response?.docs));
+    const data = yield call(getPosts, payload);
+    yield put(fetchPostsSuccess(data?.response));
   } catch (error) {
     yield put(fetchPostsFailed(error.response));
   }

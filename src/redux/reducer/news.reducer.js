@@ -5,10 +5,13 @@ const initialState = {
   isLoading: false,
   data: [],
   error: '',
-  after: null,
+  page: 0,
 };
 
 export default (state = initialState, action) => {
+  // console.log(action.payload);
+  // console.log(action.page);
+
   switch (action.type) {
     case reduxHelper(FETCH_POSTS).actionRequest:
       return {
@@ -16,11 +19,12 @@ export default (state = initialState, action) => {
         isLoading: true,
       };
     case reduxHelper(FETCH_POSTS).actionSuccess:
+      const data = [...state.data, ...action.payload];
       return {
         ...state,
         isLoading: false,
-        data: state.data.concat(action.payload),
-        after: action.after,
+        data,
+        page: action.page,
         error: '',
       };
     case reduxHelper(FETCH_POSTS).actionFailure:

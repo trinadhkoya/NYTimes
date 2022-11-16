@@ -1,5 +1,10 @@
 import {get} from './APIClient';
 
-export const getPosts = (query = '', page = 0) => {
+/**
+ *We can pass parameter as in when required
+ * @param page
+ * @returns {Promise<*>}
+ */
+export const getPosts = page => {
   return get(`svc/search/v2/articlesearch.json?&page=${page}`);
 };

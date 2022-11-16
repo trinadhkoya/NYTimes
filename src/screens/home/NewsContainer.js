@@ -2,31 +2,29 @@ import React, {useEffect, useState} from 'react';
 import NewsPage from 'screens/home/NewsPage';
 import {connect, useDispatch} from 'react-redux';
 import {fetchPostsRequest} from 'redux/actions/news.actions';
-import Loader from 'ui-kit/Loader';
 import FloatingButton from 'ui-kit/FloatingButton';
+
+const initialPage = 0;
+const maxColumns = 2;
 
 const NewsContainer = props => {
   const dispatch = useDispatch();
   const [displayGrid, setDisplayGrid] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchPostsRequest());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(fetchPostsRequest(initialPage));
   }, []);
 
-  if (props.isLoading) {
-    return <Loader isLoading={props.isLoading} size={'large'} />;
-  }
-  const onFilterByCategory = val => {
-    // dispatch(fetchPostsRequest(val));
+  const onPressLoadMore = page => {
+    dispatch(fetchPostsRequest(page));
   };
 
   return (
     <>
       <NewsPage
         {...props}
-        onFilterByCategory={onFilterByCategory}
-        numColumns={displayGrid ? 2 : 1}
+        onPressLoadMore={onPressLoadMore}
+        numColumns={displayGrid ? maxColumns : 1}
         news={props.news}
       />
       <FloatingButton
@@ -39,12 +37,11 @@ const NewsContainer = props => {
 
 NewsContainer.propTypes = {};
 
-const mapStateToProps = ({newsFeed}) => {
-  return {
-    news: newsFeed.data,
-    isLoading: newsFeed.isLoading,
-    error: newsFeed.error,
-  };
-};
+const mapStateToProps = ({newsFeed}) => ({
+  news: newsFeed.data,
+  isLoading: newsFeed.isLoading,
+  error: newsFeed.error,
+  page: newsFeed.page,
+});
 
 export default connect(mapStateToProps)(NewsContainer);

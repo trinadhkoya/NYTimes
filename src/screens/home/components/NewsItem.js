@@ -12,7 +12,7 @@ const NewsItem = ({item}) => {
   return (
     <View style={styles.container}>
       <Text numberOfLines={2} style={styles.snippet}>
-        {item?.snippet || item.abstract}
+        {item?.snippet || item?.abstract}
       </Text>
       <View style={[styles.badge]}>
         <Text style={styles.badgeText}>{item.source}</Text>
